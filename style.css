@@ -1,0 +1,12 @@
+h1 {
+    text-align: center;
+}
+
+.lib {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 90%;
+    padding: 10px;
+}
