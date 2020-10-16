@@ -1,12 +1,34 @@
-h1 {
-    text-align: center;
+h1, h4 {
+  text-align: center;
 }
 
 .lib {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px auto;
-    width: 90%;
-    padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px auto;
+  width: 90%;
+  padding: 10px;
+}
+
+button {
+  margin: 5px 20px;
+}
+
+h4 {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .lib {
+    height: 100px;
+    overflow: scroll;
+    justify-content: center;
+  }
+  button {
+    width: 70%;
+    font-size: 1.2em;
+    display: block;
+    margin: 8pm auto;
+  }
 }

@@ -6,7 +6,7 @@
 //merced-container
 /////////////////
 
-const containerTemplate = document.createElement('template');
+const containerTemplate = document.createElement("template");
 
 containerTemplate.innerHTML = `
 <div style="
@@ -25,35 +25,35 @@ margin: 20px auto;
 `;
 
 export class MercedContainer extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
-    connectedCallback() {
-        this.shadowRoot.appendChild(containerTemplate.content.cloneNode(true));
-        const theDiv = this.shadowRoot.getElementById('cont');
-        theDiv.style.justifyContent = this.getAttribute('justify');
-        theDiv.style.alignItems = this.getAttribute('align');
-        theDiv.style.height = this.getAttribute('height');
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
+    this.shadowRoot.appendChild(containerTemplate.content.cloneNode(true));
+    const theDiv = this.shadowRoot.getElementById("cont");
+    theDiv.style.justifyContent = this.getAttribute("justify");
+    theDiv.style.alignItems = this.getAttribute("align");
+    theDiv.style.height = this.getAttribute("height");
+  }
 
-    toggle() {
-        const theDiv = this.shadowRoot.getElementById('cont');
-        if (theDiv.style.display === 'flex') {
-            theDiv.style.display = 'none';
-        } else {
-            theDiv.style.display = 'flex';
-        }
+  toggle() {
+    const theDiv = this.shadowRoot.getElementById("cont");
+    if (theDiv.style.display === "flex") {
+      theDiv.style.display = "none";
+    } else {
+      theDiv.style.display = "flex";
     }
+  }
 }
 
-window.customElements.define('merced-container', MercedContainer);
+window.customElements.define("merced-container", MercedContainer);
 
 /////////////////
 //merced-card
 /////////////////
 
-const cardTemplate = document.createElement('template');
+const cardTemplate = document.createElement("template");
 
 cardTemplate.innerHTML = `
 <div style="
@@ -73,41 +73,41 @@ margin: 20px auto;
 `;
 
 export class MercedCard extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
-    connectedCallback() {
-        this.shadowRoot.appendChild(cardTemplate.content.cloneNode(true));
-        const theDiv = this.shadowRoot.getElementById('card');
-        theDiv.style.justifyContent = this.getAttribute('justify');
-        theDiv.style.alignItems = this.getAttribute('align');
-        theDiv.style.height = this.getAttribute('height');
-        theDiv.style.border = this.getAttribute('theBorder');
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
+    this.shadowRoot.appendChild(cardTemplate.content.cloneNode(true));
+    const theDiv = this.shadowRoot.getElementById("card");
+    theDiv.style.justifyContent = this.getAttribute("justify");
+    theDiv.style.alignItems = this.getAttribute("align");
+    theDiv.style.height = this.getAttribute("height");
+    theDiv.style.border = this.getAttribute("theBorder");
+  }
 
-    toggle() {
-        const theDiv = this.shadowRoot.getElementById('card');
-        if (theDiv.style.display === 'flex') {
-            theDiv.style.display = 'none';
-        } else {
-            theDiv.style.display = 'flex';
-        }
+  toggle() {
+    const theDiv = this.shadowRoot.getElementById("card");
+    if (theDiv.style.display === "flex") {
+      theDiv.style.display = "none";
+    } else {
+      theDiv.style.display = "flex";
     }
+  }
 }
 
-window.customElements.define('merced-card', MercedCard);
+window.customElements.define("merced-card", MercedCard);
 
 ////////////////////////
 //mapToDom Function
 ///////////////////////
 
 export const mapToDom = (arr, callback, element) => {
-    let html = '';
-    for (index = 0; index < arr.length; index++) {
-        html = html + callback(arr[index], index);
-    }
-    element.innerHTML = html;
+  let html = "";
+  for (index = 0; index < arr.length; index++) {
+    html = html + callback(arr[index], index);
+  }
+  element.innerHTML = html;
 };
 
 ////////////////////////
@@ -115,12 +115,12 @@ export const mapToDom = (arr, callback, element) => {
 ///////////////////////
 
 export const bindData = (arr, callback, element) => {
-    let myData = arr;
+  let myData = arr;
+  mapToDom(myData, callback, element);
+  return (newArr) => {
+    myData = newArr;
     mapToDom(myData, callback, element);
-    return (newArr) => {
-        myData = newArr;
-        mapToDom(myData, callback, element);
-    };
+  };
 };
 
 ////////////////////////
@@ -128,21 +128,21 @@ export const bindData = (arr, callback, element) => {
 ///////////////////////
 
 export const createRotator = (object, element) => {
-    return (string) => {
-        element.innerHTML = object[string];
-    };
+  return (string) => {
+    element.innerHTML = object[string];
+  };
 };
 
 export const createBuildRotator = (object, element) => {
-    return (string, store) => {
-        element.innerHTML = object[string](store);
-    };
+  return (string, store) => {
+    element.innerHTML = object[string](store);
+  };
 };
 
 export const createCompRotator = (element) => {
-    return (component, attributes) => {
-        element.innerHTML = `<${component} ${attributes}></${component}>`;
-    };
+  return (component, attributes) => {
+    element.innerHTML = `<${component} ${attributes}></${component}>`;
+  };
 };
 
 ////////////////////////
@@ -150,11 +150,11 @@ export const createCompRotator = (element) => {
 ///////////////////////
 
 export const mapToString = (arr, callback) => {
-    let html = '';
-    for (let index = 0; index < arr.length; index++) {
-        html = html + callback(arr[index], index);
-    }
-    return html;
+  let html = "";
+  for (let index = 0; index < arr.length; index++) {
+    html = html + callback(arr[index], index);
+  }
+  return html;
 };
 
 ////////////////////////
@@ -162,7 +162,7 @@ export const mapToString = (arr, callback) => {
 ///////////////////////
 
 export const makeComponent = (options) => {
-    const string = `const compTemplate = document.createElement('template');
+  const string = `const compTemplate = document.createElement('template');
 
   compTemplate.innerHTML = "${options.template}";
 
@@ -182,8 +182,8 @@ export const makeComponent = (options) => {
   }
 
   window.customElements.define('${options.prefix}-${options.name}', ${options.prefix}${options.name});`;
-    console.log(string);
-    eval(string);
+  console.log(string);
+  eval(string);
 };
 
 ////////////////////////
@@ -191,12 +191,12 @@ export const makeComponent = (options) => {
 ///////////////////////
 
 export const captureProps = (element) => {
-    const att = [...element.attributes];
-    const entries = att.map((value) => {
-        return [value.name, value.value];
-    });
+  const att = [...element.attributes];
+  const entries = att.map((value) => {
+    return [value.name, value.value];
+  });
 
-    return Object.fromEntries(entries);
+  return Object.fromEntries(entries);
 };
 
 ////////////////////////////
@@ -204,19 +204,19 @@ export const captureProps = (element) => {
 ////////////////////////////
 
 export class SiteBuilder {
-    constructor(target, store, builder) {
-        this.target = target;
-        this.store = store;
-        this.template = builder(store);
-        this.builder = builder;
-        target.innerHTML = this.template;
-    }
+  constructor(target, store, builder) {
+    this.target = target;
+    this.store = store;
+    this.template = builder(store);
+    this.builder = builder;
+    target.innerHTML = this.template;
+  }
 
-    updateStore(newStore) {
-        this.store = newStore;
-        this.template = this.builder(this.store);
-        this.target.innerHTML = this.template;
-    }
+  updateStore(newStore) {
+    this.store = newStore;
+    this.template = this.builder(this.store);
+    this.target.innerHTML = this.template;
+  }
 }
 
 ////////////////////////
@@ -224,9 +224,9 @@ export class SiteBuilder {
 ///////////////////////
 
 export const makeLiveComponent = (options) => {
-    options.store = JSON.stringify(options.store);
+  options.store = JSON.stringify(options.store);
 
-    const string = `
+  const string = `
   class ${options.prefix}${options.name} extends HTMLElement {
       constructor() {
           super();
@@ -243,7 +243,7 @@ export const makeLiveComponent = (options) => {
   }
 
   window.customElements.define('${options.prefix}-${options.name}', ${options.prefix}${options.name});`;
-    eval(string);
+  eval(string);
 };
 
 ////////////////////////////
@@ -251,40 +251,40 @@ export const makeLiveComponent = (options) => {
 ////////////////////////////
 
 export class FormTool {
-    constructor(form) {
-        this.form = form;
-        this.fields = [...this.form.children].filter((value) => {
-            return (
-                (value.tagName === 'INPUT' || value.tagName === 'TEXTAREA') &&
-                value.type != 'submit'
-            );
-        });
-    }
+  constructor(form) {
+    this.form = form;
+    this.fields = [...this.form.children].filter((value) => {
+      return (
+        (value.tagName === "INPUT" || value.tagName === "TEXTAREA") &&
+        value.type != "submit"
+      );
+    });
+  }
 
-    grabValues() {
-        const entries = this.fields.map((value) => {
-            return [value.name, value.value];
-        });
-        return Object.fromEntries(entries);
-    }
+  grabValues() {
+    const entries = this.fields.map((value) => {
+      return [value.name, value.value];
+    });
+    return Object.fromEntries(entries);
+  }
 
-    fillFields(object) {
-        const keys = Object.keys(object);
-        const values = Object.values(object);
-        keys.forEach((key) => {
-            this.fields.forEach((field) => {
-                if (field.name === key) {
-                    field.value = object[key];
-                }
-            });
-        });
-    }
+  fillFields(object) {
+    const keys = Object.keys(object);
+    const values = Object.values(object);
+    keys.forEach((key) => {
+      this.fields.forEach((field) => {
+        if (field.name === key) {
+          field.value = object[key];
+        }
+      });
+    });
+  }
 
-    clearForm() {
-        const entries = this.fields.forEach((value) => {
-            value.value = null;
-        });
-    }
+  clearForm() {
+    const entries = this.fields.forEach((value) => {
+      value.value = null;
+    });
+  }
 }
 
 ////////////////////////////
@@ -292,17 +292,17 @@ export class FormTool {
 ////////////////////////////
 
 export const getQueryHash = () => {
-    const hash = window.location.href.split('#')[1];
+  const hash = window.location.href.split("#")[1];
 
-    const queryArray1 = window.location.href.split('?')[1];
+  const queryArray1 = window.location.href.split("?")[1];
 
-    const queryArray2 = queryArray1 ? queryArray1.split('#')[0].split('&') : [];
+  const queryArray2 = queryArray1 ? queryArray1.split("#")[0].split("&") : [];
 
-    const queryEntries = queryArray2.map((value) => {
-        return value.split('=');
-    });
+  const queryEntries = queryArray2.map((value) => {
+    return value.split("=");
+  });
 
-    return [Object.fromEntries(queryEntries), hash];
+  return [Object.fromEntries(queryEntries), hash];
 };
 
 ////////////////////////////
@@ -310,9 +310,9 @@ export const getQueryHash = () => {
 ////////////////////////////
 
 export const MUIRequest = async (url, object) => {
-    const response = await fetch(url, object);
-    const json = await response.json();
-    return await json;
+  const response = await fetch(url, object);
+  const json = await response.json();
+  return await json;
 };
 
 /////////////////////////
@@ -320,39 +320,39 @@ export const MUIRequest = async (url, object) => {
 /////////////////////////
 
 export const globalStore = (initialStore) => {
-    let store = initialStore;
-    let registrar = [];
+  let store = initialStore;
+  let registrar = [];
 
-    const get = () => {
-        return store;
-    };
-    const set = (newStore) => {
-        store = newStore;
+  const get = () => {
+    return store;
+  };
+  const set = (newStore) => {
+    store = newStore;
 
-        registrar.forEach((value) => {
-            value.life ? value.life.updateStore(store) : null;
-            value.updateStore ? value.updateStore(store) : null;
-            value.state ? value.setState(store) : null;
-        });
-    };
+    registrar.forEach((value) => {
+      value.life ? value.life.updateStore(store) : null;
+      value.updateStore ? value.updateStore(store) : null;
+      value.state ? value.setState(store) : null;
+    });
+  };
 
-    const register = (component) => {
-        registrar.push(component);
-        component.life ? component.life.updateStore(store) : null;
-        component.updateStore ? component.updateStore(store) : null;
-        component.state ? component.setState(store) : null;
-    };
+  const register = (component) => {
+    registrar.push(component);
+    component.life ? component.life.updateStore(store) : null;
+    component.updateStore ? component.updateStore(store) : null;
+    component.state ? component.setState(store) : null;
+  };
 
-    const clearRegister = () => {
-        registrar = [];
-    };
+  const clearRegister = () => {
+    registrar = [];
+  };
 
-    return {
-        get,
-        set,
-        register,
-        clearRegister
-    };
+  return {
+    get,
+    set,
+    register,
+    clearRegister,
+  };
 };
 
 /////////////////////////
@@ -360,10 +360,10 @@ export const globalStore = (initialStore) => {
 /////////////////////////
 
 export const gsReducer = (globalStore, reducer) => {
-    return (payload) => {
-        const newStore = reducer(globalStore.get(), payload);
-        globalStore.set(newStore);
-    };
+  return (payload) => {
+    const newStore = reducer(globalStore.get(), payload);
+    globalStore.set(newStore);
+  };
 };
 
 //////////////////
@@ -371,52 +371,52 @@ export const gsReducer = (globalStore, reducer) => {
 /////////////////
 
 export class MercedElement extends HTMLElement {
-    constructor(builder, state, reducer) {
-        super();
-        this.builder = builder;
-        this.state = state;
-        this.reducer = reducer;
-        this.props = {};
-        this.attachShadow({ mode: 'open' });
-        this.build();
-    }
+  constructor(builder, state, reducer) {
+    super();
+    this.builder = builder;
+    this.state = state;
+    this.reducer = reducer;
+    this.props = {};
+    this.attachShadow({ mode: "open" });
+    this.build();
+  }
 
-    build() {
-        this.props = captureProps(this);
-        this.shadowRoot.innerHTML = this.builder(this.state, this.props);
-    }
+  build() {
+    this.props = captureProps(this);
+    this.shadowRoot.innerHTML = this.builder(this.state, this.props);
+  }
 
-    setState(newState) {
-        this.state = newState;
-        this.build();
-    }
+  setState(newState) {
+    this.state = newState;
+    this.build();
+  }
 
-    dispatch(payload) {
-        this.setState(this.reducer(this.state, payload));
-    }
+  dispatch(payload) {
+    this.setState(this.reducer(this.state, payload));
+  }
 
-    static gState = {};
+  static gState = {};
 
-    static gRegistry = [];
+  static gRegistry = [];
 
-    static gRegister(element) {
-        this.gRegistry.push(element);
-    }
+  static gRegister(element) {
+    this.gRegistry.push(element);
+  }
 
-    static gSetState(newState) {
-        this.gState = newState;
-        this.gRegistry.forEach((value) => {
-            value.setState(this.gState);
-        });
-    }
+  static gSetState(newState) {
+    this.gState = newState;
+    this.gRegistry.forEach((value) => {
+      value.setState(this.gState);
+    });
+  }
 
-    static gDispatch(reducer, payload) {
-        this.gSetState(reducer(this.gState, payload));
-    }
+  static gDispatch(reducer, payload) {
+    this.gSetState(reducer(this.gState, payload));
+  }
 
-    static makeTag(name, element) {
-        window.customElements.define(name, element);
-    }
+  static makeTag(name, element) {
+    window.customElements.define(name, element);
+  }
 }
 
 ///////////////
@@ -424,24 +424,24 @@ export class MercedElement extends HTMLElement {
 //////////////
 
 export const simpleComponent = (options) => {
-    options.state = JSON.stringify(options.state);
-    const string = `
+  options.state = JSON.stringify(options.state);
+  const string = `
 
 class ${options.prefix}${options.name} extends HTMLElement {
     constructor() {
         super();
-        ${options.observe ? options.observe : ''}
+        ${options.observe ? options.observe : ""}
         this.builder = ${options.builder}
         this.state = ${options.state}
         this.props = {}
         this.attachShadow({ mode: 'open' });
         this.build()
     }
-    ${options.connected ? options.connected : ''}
+    ${options.connected ? options.connected : ""}
 
-    ${options.disconnected ? options.disconnected : ''}
+    ${options.disconnected ? options.disconnected : ""}
 
-    ${options.other ? options.other : ''}
+    ${options.other ? options.other : ""}
 
     build(){
       this.props = captureProps(this)
@@ -456,9 +456,9 @@ class ${options.prefix}${options.name} extends HTMLElement {
 }
 
 window.customElements.define('${options.prefix}-${options.name}', ${
-        options.prefix
-    }${options.name})`;
-    eval(string);
+    options.prefix
+  }${options.name})`;
+  eval(string);
 };
 
 ///////////////////
@@ -468,68 +468,68 @@ window.customElements.define('${options.prefix}-${options.name}', ${
 export const mRoutes = {};
 
 export class MercedRouter extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.props = captureProps(this);
-        mRoutes[this.props.name] = this;
-        this.shadowRoot.innerHTML = `<${this.props.default} ${this.props.props}><slot></slot></${this.props.default}>`;
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.props = captureProps(this);
+    mRoutes[this.props.name] = this;
+    this.shadowRoot.innerHTML = `<${this.props.default} ${this.props.props}><slot></slot></${this.props.default}>`;
+  }
 
-    route(target, props) {
-        this.shadowRoot.innerHTML = `<${target} ${props}><slot></slot></${target}>`;
-    }
+  route(target, props) {
+    this.shadowRoot.innerHTML = `<${target} ${props}><slot></slot></${target}>`;
+  }
 }
 
-window.customElements.define('m-router', MercedRouter);
+window.customElements.define("m-router", MercedRouter);
 
 export class MercedLink extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.props = captureProps(this);
-        this.shadowRoot.innerHTML = `<span style="cursor: pointer;"><slot></slot></span>`;
-        this.shadowRoot.querySelector('span').addEventListener('click', () => {
-            mRoutes[this.props.name].route(
-                this.props.target,
-                this.props.props ? this.props.props : ''
-            );
-        });
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.props = captureProps(this);
+    this.shadowRoot.innerHTML = `<span style="cursor: pointer;"><slot></slot></span>`;
+    this.shadowRoot.querySelector("span").addEventListener("click", () => {
+      mRoutes[this.props.name].route(
+        this.props.target,
+        this.props.props ? this.props.props : ""
+      );
+    });
+  }
 }
 
-window.customElements.define('m-link', MercedLink);
+window.customElements.define("m-link", MercedLink);
 
 ///////////////////////////////
 // QuickComponent
 ///////////////////////////////
 
 export const quickComponent = (
-    name,
-    builder,
-    state,
-    reducer,
-    connected,
-    disconnected
+  name,
+  builder,
+  state,
+  reducer,
+  connected,
+  disconnected
 ) => {
-    MercedElement.makeTag(
-        name,
-        class extends MercedElement {
-            constructor() {
-                super(builder, state, reducer);
-            }
+  MercedElement.makeTag(
+    name,
+    class extends MercedElement {
+      constructor() {
+        super(builder, state, reducer);
+      }
 
-            connectedCallback() {
-                const element = this;
-                connected ? connected(element) : null;
-            }
+      connectedCallback() {
+        const element = this;
+        connected ? connected(element) : null;
+      }
 
-            disconnectedCallback() {
-                const element = this;
-                disconnected ? disconnected(element) : null;
-            }
-        }
-    );
+      disconnectedCallback() {
+        const element = this;
+        disconnected ? disconnected(element) : null;
+      }
+    }
+  );
 };
 
 ///////////////////////////////
@@ -537,33 +537,33 @@ export const quickComponent = (
 ///////////////////////////////
 
 export const $m = {
-    select: (q) => {
-        return document.querySelector(q);
-    },
-    selectAll: (q) => {
-        return document.querySelectorAll(q);
-    },
-    byId: (q) => {
-        return document.getElementById(q);
-    },
-    byTag: (q) => {
-        return document.getElementsByTagName(q);
-    },
-    byClass: (q) => {
-        return document.getElementsByClassName(q);
-    },
-    create: (q) => {
-        return document.createElement(q);
-    },
-    remove: (q) => {
-        return document.removeChild(q);
-    },
-    append: (q) => {
-        return document.appendChild(q);
-    },
-    replace: (q, y) => {
-        return document.replaceChild(q, y);
-    }
+  select: (q) => {
+    return document.querySelector(q);
+  },
+  selectAll: (q) => {
+    return document.querySelectorAll(q);
+  },
+  byId: (q) => {
+    return document.getElementById(q);
+  },
+  byTag: (q) => {
+    return document.getElementsByTagName(q);
+  },
+  byClass: (q) => {
+    return document.getElementsByClassName(q);
+  },
+  create: (q) => {
+    return document.createElement(q);
+  },
+  remove: (q) => {
+    return document.removeChild(q);
+  },
+  append: (q) => {
+    return document.appendChild(q);
+  },
+  replace: (q, y) => {
+    return document.replaceChild(q, y);
+  },
 };
 
 ///////////////////////////////
@@ -571,31 +571,31 @@ export const $m = {
 ///////////////////////////////
 
 export const $s = {
-    select: (e, q) => {
-        return e.shadowRoot.querySelector(q);
-    },
-    selectAll: (e, q) => {
-        return e.shadowRoot.querySelectorAll(q);
-    },
-    byId: (e, q) => {
-        return e.shadowRoot.getElementById(q);
-    },
-    byTag: (e, q) => {
-        return e.shadowRoot.getElementsByTagName(q);
-    },
-    byClass: (e, q) => {
-        return e.shadowRoot.getElementsByClassName(q);
-    },
-    create: (e, q) => {
-        return e.shadowRoot.createElement(q);
-    },
-    remove: (e, q) => {
-        return e.shadowRoot.removeChild(q);
-    },
-    append: (e, q) => {
-        return e.shadowRoot.appendChild(q);
-    },
-    replace: (e, q, y) => {
-        return e.shadowRoot.replaceChild(q, y);
-    }
+  select: (e, q) => {
+    return e.shadowRoot.querySelector(q);
+  },
+  selectAll: (e, q) => {
+    return e.shadowRoot.querySelectorAll(q);
+  },
+  byId: (e, q) => {
+    return e.shadowRoot.getElementById(q);
+  },
+  byTag: (e, q) => {
+    return e.shadowRoot.getElementsByTagName(q);
+  },
+  byClass: (e, q) => {
+    return e.shadowRoot.getElementsByClassName(q);
+  },
+  create: (e, q) => {
+    return e.shadowRoot.createElement(q);
+  },
+  remove: (e, q) => {
+    return e.shadowRoot.removeChild(q);
+  },
+  append: (e, q) => {
+    return e.shadowRoot.appendChild(q);
+  },
+  replace: (e, q, y) => {
+    return e.shadowRoot.replaceChild(q, y);
+  },
 };
